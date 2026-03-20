@@ -8,10 +8,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://hospital-management-system-nine-khaki.vercel.app'],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 // Routes
