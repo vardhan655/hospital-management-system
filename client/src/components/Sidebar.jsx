@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   MdDashboard, MdPeople, MdLocalHospital, MdMedicalServices,
-  MdEventNote, MdBusiness, MdLogout
+  MdEventNote, MdBusiness, MdLogout, MdPerson
 } from 'react-icons/md';
 
 const navConfig = {
@@ -12,16 +12,19 @@ const navConfig = {
     { to: '/admin/doctors', icon: <MdMedicalServices />, label: 'Doctors & Staff' },
     { to: '/admin/departments', icon: <MdBusiness />, label: 'Departments' },
     { to: '/admin/appointments', icon: <MdEventNote />, label: 'Appointments' },
+    { to: '/profile', icon: <MdPerson />, label: 'Profile Settings' }
   ],
   doctor: [
     { to: '/doctor', icon: <MdDashboard />, label: 'Dashboard', end: true },
     { to: '/doctor/appointments', icon: <MdEventNote />, label: 'My Appointments' },
     { to: '/doctor/patients', icon: <MdPeople />, label: 'My Patients' },
+    { to: '/profile', icon: <MdPerson />, label: 'Profile Settings' }
   ],
   staff: [
     { to: '/staff', icon: <MdDashboard />, label: 'Dashboard', end: true },
     { to: '/staff/appointments', icon: <MdEventNote />, label: 'Appointments' },
     { to: '/staff/patients', icon: <MdPeople />, label: 'Patients' },
+    { to: '/profile', icon: <MdPerson />, label: 'Profile Settings' }
   ]
 };
 

@@ -14,6 +14,7 @@ import DoctorPatients from './pages/doctor/Patients';
 import StaffDashboard from './pages/staff/Dashboard';
 import StaffAppointments from './pages/staff/Appointments';
 import StaffPatients from './pages/staff/Patients';
+import Profile from './pages/Profile';
 import './index.css';
 
 const PrivateRoute = ({ element, roles }) => {
@@ -62,6 +63,11 @@ function App() {
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
+          
+          {/* Global Private routes */}
+          <Route path="/profile" element={<PrivateRoute element={<Layout />} />}>
+            <Route index element={<Profile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
