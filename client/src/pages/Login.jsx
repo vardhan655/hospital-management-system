@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { MdLocalHospital, MdEmail, MdLock, MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
-const demoAccounts = [
-  { role: 'Admin', email: 'admin@hospital.com', password: 'admin123' },
-  { role: 'Doctor', email: 'sarah.mitchell@hospital.com', password: 'doctor123' },
-  { role: 'Staff', email: 'alice.j@hospital.com', password: 'staff123' },
-];
-
 const Login = () => {
+  const [demoAccounts, setDemoAccounts] = useState([
+    { role: 'Admin', email: 'Loading...', password: 'admin123' },
+    { role: 'Doctor', email: 'Loading...', password: 'doctor123' },
+    { role: 'Staff', email: 'Loading...', password: 'staff123' },
+  ]);
+
+  useEffect(() => {
+    const fetchDemo = async () => {
+      try {
+        const res = await api.get('/auth/demo');
+        if (res.data?.data) setDemoAccounts(res.data.data);
+      } catch (err) {
+        console.error('Failed to fetch demo accounts');
+      }
+    };
+    fetchDemo();
+  }, []);
+
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);

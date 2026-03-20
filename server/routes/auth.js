@@ -56,6 +56,27 @@ router.post('/register',
   }
 );
 
+// @route   GET /api/auth/demo
+// @access  Public
+router.get('/demo', async (req, res) => {
+  try {
+    const admin = await User.findOne({ role: 'admin' }).select('email');
+    const doctor = await User.findOne({ role: 'doctor' }).select('email');
+    const staff = await User.findOne({ role: 'staff' }).select('email');
+    
+    res.json({
+      success: true,
+      data: [
+        { role: 'Admin', email: admin?.email || 'admin@hospital.com', password: 'admin123' },
+        { role: 'Doctor', email: doctor?.email || 'sarah.mitchell@hospital.com', password: 'doctor123' },
+        { role: 'Staff', email: staff?.email || 'alice.j@hospital.com', password: 'staff123' }
+      ]
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // @route   POST /api/auth/login
 // @access  Public
 router.post('/login',
